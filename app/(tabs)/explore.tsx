@@ -1,13 +1,17 @@
 import Ionicons from "@expo/vector-icons/Ionicons";
-import { Image, Platform, StyleSheet } from "react-native";
+import { Image, Platform, StyleSheet, Text } from "react-native";
 
 import { Collapsible } from "@/components/Collapsible";
 import { ExternalLink } from "@/components/ExternalLink";
 import ParallaxScrollView from "@/components/ParallaxScrollView";
 import { ThemedText } from "@/components/ThemedText";
 import { ThemedView } from "@/components/ThemedView";
+import { router, useLocalSearchParams } from "expo-router";
 
 export default function TabTwoScreen() {
+  const { "#": hash } = useLocalSearchParams<{ "#": string }>();
+  console.log("hash", hash);
+
   return (
     <ParallaxScrollView
       headerBackgroundColor={{ light: "#D0D0D0", dark: "#353636" }}
@@ -15,6 +19,10 @@ export default function TabTwoScreen() {
         <Ionicons size={310} name="code-slash" style={styles.headerImage} />
       }
     >
+      <Text onPress={() => router.setParams({ "#": "wow=false" })}>
+        Set a new hash
+      </Text>
+
       <ThemedView style={styles.titleContainer}>
         <ThemedText type="title">Explore</ThemedText>
       </ThemedView>
